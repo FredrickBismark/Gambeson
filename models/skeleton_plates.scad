@@ -200,9 +200,9 @@ module lumbar_bridge() {
             cylinder(d = bolt_d, h = hdpe_t + 2, $fn = 16);
         }
 
-        // D3O insert pocket outline (kidney protection area)
+        // D3O insert pocket recess (kidney protection area, 2mm deep)
         translate([lumbar_w / 2 - 50, 40, hdpe_t - 2])
-        cube([100, 80, 3]);
+        cube([100, 80, hdpe_t]);
 
         // Webbing slots for hip belt connection
         for (x = [15, lumbar_w - 65])

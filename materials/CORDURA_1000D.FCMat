@@ -1,0 +1,18 @@
+; FreeCAD material card for CORDURA 1000D
+; Heavy-duty nylon 6,6 fabric — outer shell layer
+; NOTE: For orthotropic shell modeling in CalculiX, use manual .inp
+;       with *ELASTIC, TYPE=ENGINEERING CONSTANTS
+
+[General]
+Name = CORDURA_1000D
+Description = CORDURA 1000D nylon fabric, heavy-duty outer abrasion shell
+Father = None
+
+[Mechanical]
+Density = 1140 kg/m^3
+YoungsModulus = 2800 MPa
+PoissonRatio = 0.35
+
+[Thermal]
+ThermalConductivity = 0.25 W/m/K
+SpecificHeat = 1700 J/kg/K

@@ -30,4 +30,5 @@ def test_simulation_params_loads() -> None:
     path = CONFIG_DIR / "simulation_params.yaml"
     assert path.exists(), f"Missing {path}"
     data = yaml.safe_load(path.read_text())
-    assert "solver" in data or "load_cases" in data
+    assert "solver" in data
+    assert "structural" in data["solver"]

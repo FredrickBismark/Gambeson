@@ -3,7 +3,7 @@
 **   Density: tonnes/mm³
 **   Modulus: MPa (N/mm²)
 **   Conductivity: mW/(mm·K)  [same numeric value as W/(m·K)]
-**   Specific heat: mJ/(tonne·K)  [= J/(kg·K) × 1e9]
+**   Specific heat: mJ/(tonne·K)  [= J/(kg·K) × 1e6]
 **
 ** ============================================================
 ** Layer 1: 3D Spacer Mesh (ventilation)
@@ -88,7 +88,7 @@
 2800., 2800., 200., 0.35, 0.1, 0.1, 500., 100.
 100.
 *DENSITY
-3.15e-7
+1.14e-6
 *CONDUCTIVITY
 0.25
 *SPECIFIC HEAT
@@ -102,7 +102,7 @@
 2800., 2800., 200., 0.35, 0.1, 0.1, 500., 100.
 100.
 *DENSITY
-3.15e-7
+1.14e-6
 *CONDUCTIVITY
 0.25
 *SPECIFIC HEAT
