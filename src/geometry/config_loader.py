@@ -97,9 +97,16 @@ def load_config(
     if config_path is None:
         config_path = Path(__file__).parent.parent.parent / "config" / "armor_config.yaml"
 
-    with open(config_path) as f:
-        data = yaml.safe_load(f)
+    try:
+        with open(config_path) as f:
+            data = yaml.safe_load(f)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Armor config not found: {config_path}")
+    except yaml.YAMLError as e:
+        raise ValueError(f"Invalid YAML in {config_path}: {e}")
 
+    if "sizes" not in data:
+        raise ValueError(f"Config missing 'sizes' section in {config_path}")
     if size not in data["sizes"]:
         raise ValueError(f"Unknown size '{size}'. Valid: {list(data['sizes'].keys())}")
 

@@ -82,12 +82,11 @@ def make_layer_shell(
         inner = base_shape.makeOffsetShape(inner_offset, tolerance)
         layer = outer.cut(inner)
         return layer
-    except Exception:
-        # Fallback: cannot offset this shape, skip gracefully
+    except (RuntimeError, ValueError, StopIteration) as e:
         raise RuntimeError(
-            f"Offset failed at offset={inner_offset}, thickness={thickness}. "
+            f"Offset failed at offset={inner_offset}, thickness={thickness}: {e}. "
             "Try simplifying the base geometry or reducing fillet radii."
-        )
+        ) from e
 
 
 def make_flat_panel_layer(
