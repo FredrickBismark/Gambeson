@@ -1,0 +1,15 @@
+# Docker Compose for the Gambeson simulation pipeline
+#
+# Usage:
+#   docker compose -f docker/docker-compose.yaml run sim --stage all --size M
+#   docker compose -f docker/docker-compose.yaml run sim pytest
+
+services:
+  sim:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    entrypoint: ["python", "-m", "src.pipeline.orchestrator"]

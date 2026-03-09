@@ -14,11 +14,11 @@ An open-source, DIY-manufacturable protective garment that integrates medieval q
 - [x] Simulation pipeline research document
 - [x] CLAUDE.md project context
 - [x] Development roadmap (this document)
-- [ ] Choose open hardware license (recommend CERN-OHL-S-2.0)
-- [ ] Set up Python project scaffolding (`pyproject.toml`, linting, CI)
-- [ ] Create `config/` YAML schema for armor parameters, materials, and simulation settings
-- [ ] Set up Docker environment for headless FreeCAD + solvers
-- [ ] Create GitHub issue templates (bug, design proposal, build report, material test)
+- [x] Choose open hardware license (CERN-OHL-S-2.0)
+- [x] Set up Python project scaffolding (`pyproject.toml`, linting, CI)
+- [x] Create `config/` YAML schema for armor parameters, materials, and simulation settings
+- [x] Set up Docker environment for headless FreeCAD + solvers
+- [x] Create GitHub issue templates (bug, design proposal, build report, material test)
 
 **Deliverables:** Buildable dev environment, project governance docs
 

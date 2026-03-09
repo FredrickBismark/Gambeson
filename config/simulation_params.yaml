@@ -1,0 +1,103 @@
+# Simulation parameters for the Modern Gambeson System
+#
+# Unit system: mm / N / s / K
+
+solver:
+  structural:
+    type: calculix
+    binary: ccx
+    analysis_type: static
+    geometric_nonlinearity: false
+    element_type: C3D10       # 10-node second-order tetrahedra
+    matrix_solver: default    # spooles, pastix, pardiso
+    output_format: frd        # frd (CalculiX native) or vtk
+
+  thermal:
+    type: elmer
+    binary: ElmerSolver
+    analysis_type: steady_state  # steady_state or transient
+    element_type: C3D10
+    transient:
+      timestep: 1.0           # seconds
+      total_time: 3600.0      # 1 hour to equilibrium
+      output_interval: 60.0   # write results every 60s
+
+  impact:
+    type: openradioss
+    binary: openradioss
+    analysis_type: explicit
+    timestep_safety: 0.9
+    total_time: 0.01          # 10 ms impact event
+    output_interval: 0.0001   # every 0.1 ms
+
+meshing:
+  engine: gmsh
+  algorithm: delaunay
+  element_order: 2           # second-order
+  min_element_size: 1.0      # mm
+  max_element_size: 10.0     # mm
+  refinement_zones:
+    - name: skeleton_foam_interface
+      target_size: 2.0
+    - name: quilting_stitch_lines
+      target_size: 3.0
+    - name: impact_zone
+      target_size: 1.5
+  quality:
+    min_aspect_ratio: 0.1
+    min_jacobian: 0.1
+
+load_cases:
+  shoulder_yoke_load:
+    description: "30 kg equipment load distributed on shoulder yokes"
+    type: force
+    magnitude: 300.0          # N (≈30 kg × 9.81)
+    direction: [0, 0, -1]     # gravity direction
+    application: shoulder_yoke_contact_faces
+
+  hip_belt_reaction:
+    description: "60-70% of load transferred to hip belt"
+    type: fixed
+    application: hip_belt_bottom_face
+
+  helmet_bearing_load:
+    description: "5 kg helmet + accessories on bearing rail"
+    type: force
+    magnitude: 49.05          # N (≈5 kg × 9.81)
+    direction: [0, 0, -1]
+    application: bearing_rail_contact
+
+  self_weight:
+    description: "Gravitational load on full assembly"
+    type: gravity
+    magnitude: 9810.0         # mm/s² (9.81 m/s² in mm units)
+    direction: [0, 0, -1]
+
+  impact_5j:
+    description: "CE Level 1 test: 2 kg mass, 5 J impact energy"
+    type: impact
+    impactor_mass: 2.0        # kg
+    impactor_velocity: 2236.0 # mm/s (√(2×5/2) m/s = 2.236 m/s)
+    impactor_diameter: 50.0   # mm, hemispherical tip
+    drop_height: 255.0        # mm (5 J ÷ 2 kg ÷ 9.81)
+
+thermal_boundary_conditions:
+  body_surface:
+    type: temperature
+    value: 310.15             # K (37°C skin temperature)
+
+  outer_surface:
+    type: convection
+    film_coefficient: 10.0    # W/(m²·K), moderate natural convection
+    ambient_temperature: 293.0 # K (20°C)
+
+  # Variant conditions for environmental testing
+  cold_environment:
+    type: convection
+    film_coefficient: 25.0    # W/(m²·K), wind chill
+    ambient_temperature: 263.15 # K (-10°C)
+
+  hot_environment:
+    type: convection
+    film_coefficient: 5.0     # W/(m²·K), still air
+    ambient_temperature: 308.15 # K (35°C)
