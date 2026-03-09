@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     elmer \
     elmerfem-csc \
     openscad \
+    openradioss \
     libocct-modeling-algorithms-dev \
     libocct-data-exchange-dev \
     && rm -rf /var/lib/apt/lists/*
