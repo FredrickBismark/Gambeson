@@ -1,0 +1,18 @@
+; FreeCAD material card for High-Density EVA Foam
+; Used for impact absorption layer (85 kg/m³ density)
+; NOTE: FreeCAD FEM uses linear elastic; for accurate foam behavior
+;       use CalculiX *HYPERFOAM via manual .inp editing
+
+[General]
+Name = EVA_HD
+Description = High-density EVA foam, 85 kg/m³, impact absorption layer
+Father = None
+
+[Mechanical]
+Density = 85 kg/m^3
+YoungsModulus = 2.5 MPa
+PoissonRatio = 0.05
+
+[Thermal]
+ThermalConductivity = 0.04 W/m/K
+SpecificHeat = 2300 J/kg/K

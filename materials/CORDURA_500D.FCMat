@@ -1,0 +1,18 @@
+; FreeCAD material card for CORDURA 500D
+; Nylon 6,6 fabric — outer shell layer
+; NOTE: For orthotropic shell modeling in CalculiX, use manual .inp
+;       with *ELASTIC, TYPE=ENGINEERING CONSTANTS
+
+[General]
+Name = CORDURA_500D
+Description = CORDURA 500D nylon fabric, outer abrasion shell
+Father = None
+
+[Mechanical]
+Density = 1140 kg/m^3
+YoungsModulus = 2800 MPa
+PoissonRatio = 0.35
+
+[Thermal]
+ThermalConductivity = 0.25 W/m/K
+SpecificHeat = 1700 J/kg/K

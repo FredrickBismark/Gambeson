@@ -4,7 +4,7 @@
 #   - Density: tonnes/mm³  (kg/m³ × 1e-9)
 #   - Young's modulus: MPa (= N/mm²)
 #   - Thermal conductivity: mW/(mm·K) (= W/(m·K))
-#   - Specific heat: mJ/(tonne·K) (= J/(kg·K) × 1e9)
+#   - Specific heat: mJ/(tonne·K) (= J/(kg·K) × 1e6)
 
 materials:
   HDPE:

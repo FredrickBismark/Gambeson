@@ -1,0 +1,17 @@
+; FreeCAD material card for Cotton Batting
+; Used for comfort padding and quilted structure layers
+; NOTE: Extremely compliant — omit from structural FEA, thermal only
+
+[General]
+Name = CottonBatting
+Description = 100% cotton batting, quilting grade
+Father = None
+
+[Mechanical]
+Density = 60 kg/m^3
+YoungsModulus = 0.01 MPa
+PoissonRatio = 0.1
+
+[Thermal]
+ThermalConductivity = 0.038 W/m/K
+SpecificHeat = 1300 J/kg/K

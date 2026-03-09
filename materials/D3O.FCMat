@@ -1,0 +1,19 @@
+; FreeCAD material card for D3O (approximation)
+; Rate-sensitive impact polymer — properties are approximated
+; NOTE: Actual D3O properties are proprietary. This card uses
+;       polyurethane foam literature values as approximation.
+;       For rate-dependent behavior, use CalculiX *HYPERFOAM + *VISCOELASTIC
+
+[General]
+Name = D3O
+Description = D3O rate-sensitive impact polymer (approximated properties)
+Father = None
+
+[Mechanical]
+Density = 350 kg/m^3
+YoungsModulus = 5.0 MPa
+PoissonRatio = 0.05
+
+[Thermal]
+ThermalConductivity = 0.055 W/m/K
+SpecificHeat = 1800 J/kg/K

@@ -1,0 +1,135 @@
+** CalculiX material definitions for Modern Gambeson System
+** Unit system: mm / N / s / K
+**   Density: tonnes/mm³
+**   Modulus: MPa (N/mm²)
+**   Conductivity: mW/(mm·K)  [same numeric value as W/(m·K)]
+**   Specific heat: mJ/(tonne·K)  [= J/(kg·K) × 1e9]
+**
+** ============================================================
+** Layer 1: 3D Spacer Mesh (ventilation)
+** ============================================================
+*MATERIAL, NAME=SPACER_MESH
+*ELASTIC
+5.0, 0.2
+*DENSITY
+1.34e-7
+*CONDUCTIVITY
+0.06
+*SPECIFIC HEAT
+1.5e9
+**
+** ============================================================
+** Layer 2: Cotton Batting (comfort padding)
+** ============================================================
+*MATERIAL, NAME=COTTON_BATTING
+*ELASTIC
+0.01, 0.1
+*DENSITY
+6.0e-8
+*CONDUCTIVITY
+0.038
+*SPECIFIC HEAT
+1.3e9
+**
+** ============================================================
+** Layer 3: HDPE Skeleton (structural)
+** ============================================================
+*MATERIAL, NAME=HDPE
+*ELASTIC
+1100., 0.42
+*DENSITY
+9.5e-7
+*CONDUCTIVITY
+0.46
+*SPECIFIC HEAT
+2.1e9
+**
+** ============================================================
+** Layer 4a: High-Density EVA Foam (impact absorption)
+** Hyperfoam Ogden N=1: mu1, alpha1, nu1
+** ============================================================
+*MATERIAL, NAME=EVA_FOAM
+*HYPERFOAM, N=1
+1.25, 2.0, 0.0
+*DENSITY
+8.5e-8
+*CONDUCTIVITY
+0.04
+*SPECIFIC HEAT
+2.3e9
+**
+** ============================================================
+** Layer 4b: D3O (rate-sensitive impact — approximation)
+** Hyperfoam + viscoelastic Prony series
+** WARNING: Properties approximated from polyurethane literature
+** ============================================================
+*MATERIAL, NAME=D3O
+*HYPERFOAM, N=1
+2.0, 2.5, 0.0
+*DENSITY
+3.5e-7
+*CONDUCTIVITY
+0.055
+*SPECIFIC HEAT
+1.8e9
+** Prony series for rate-dependent stiffening
+** g_i, k_i, tau_i (2 terms)
+*VISCOELASTIC
+0.4, 0.4, 0.001
+0.2, 0.2, 0.1
+**
+** ============================================================
+** Layer 6: CORDURA 500D (outer shell — orthotropic)
+** Engineering constants: E1, E2, E3, nu12, nu13, nu23, G12, G13
+**                        G23 (on second line)
+** ============================================================
+*MATERIAL, NAME=CORDURA_500D
+*ELASTIC, TYPE=ENGINEERING CONSTANTS
+2800., 2800., 200., 0.35, 0.1, 0.1, 500., 100.
+100.
+*DENSITY
+3.15e-7
+*CONDUCTIVITY
+0.25
+*SPECIFIC HEAT
+1.7e9
+**
+** ============================================================
+** CORDURA 1000D variant (heavy-duty shell)
+** ============================================================
+*MATERIAL, NAME=CORDURA_1000D
+*ELASTIC, TYPE=ENGINEERING CONSTANTS
+2800., 2800., 200., 0.35, 0.1, 0.1, 500., 100.
+100.
+*DENSITY
+3.15e-7
+*CONDUCTIVITY
+0.25
+*SPECIFIC HEAT
+1.7e9
+**
+** ============================================================
+** Closed-cell foam (collar/hip belt padding)
+** ============================================================
+*MATERIAL, NAME=CLOSED_CELL_FOAM
+*HYPERFOAM, N=1
+0.8, 2.0, 0.0
+*DENSITY
+6.5e-8
+*CONDUCTIVITY
+0.04
+*SPECIFIC HEAT
+2.1e9
+**
+** ============================================================
+** Aluminum 6061-T6 (bearing rail track)
+** ============================================================
+*MATERIAL, NAME=ALUMINUM_6061
+*ELASTIC
+68900., 0.33
+*DENSITY
+2.7e-6
+*CONDUCTIVITY
+167.
+*SPECIFIC HEAT
+8.96e8

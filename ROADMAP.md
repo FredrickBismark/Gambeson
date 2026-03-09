@@ -30,31 +30,31 @@ An open-source, DIY-manufacturable protective garment that integrates medieval q
 
 ### 1A — Material Library
 
-- [ ] Create `materials.yaml` with all 7 layer materials (spacer mesh, cotton batting, HDPE, EVA foam, D3O, quilted batting, CORDURA)
-- [ ] Create `.FCMat` material cards for FreeCAD FEM integration
-- [ ] Create CalculiX `.inp` material blocks (with correct mm/N/s/K unit conversions)
+- [x] Create `materials.yaml` with all 7 layer materials (spacer mesh, cotton batting, HDPE, EVA foam, D3O, quilted batting, CORDURA)
+- [x] Create `.FCMat` material cards for FreeCAD FEM integration
+- [x] Create CalculiX `.inp` material blocks (with correct mm/N/s/K unit conversions)
   - Linear elastic: HDPE, CORDURA (orthotropic), spacer mesh
   - Hyperfoam: EVA (Ogden N=1, μ₁≈1.25 MPa, α₁≈2.0)
   - Hyperfoam + viscoelastic: D3O approximation (Prony series from polyurethane literature)
-- [ ] Document material sources and data provenance
-- [ ] Validation: cross-check density, modulus, conductivity against MatWeb/MakeItFrom
+- [x] Document material sources and data provenance
+- [x] Validation: cross-check density, modulus, conductivity against MatWeb/MakeItFrom
 
 ### 1B — Parametric Body Geometry (CadQuery)
 
-- [ ] Implement base torso shape generator from size-graded measurements (S–XXL)
-- [ ] Implement `makeOffsetShape()` layer stacking for the 6-layer armor cross-section
-- [ ] Flat panel extrusion fallback for zones where offset fails on sharp features
-- [ ] STEP export for each layer as separate solid body
-- [ ] Size grading driven by `config/armor_config.yaml` lookup tables
+- [x] Implement base torso shape generator from size-graded measurements (S–XXL)
+- [x] Implement `makeOffsetShape()` layer stacking for the 6-layer armor cross-section
+- [x] Flat panel extrusion fallback for zones where offset fails on sharp features
+- [x] STEP export for each layer as separate solid body
+- [x] Size grading driven by `config/armor_config.yaml` lookup tables
 
 ### 1C — Mechanical Parts (OpenSCAD + BOSL2)
 
-- [ ] V-groove rail track: 200 mm arc, parametric radius, V-groove cross-section via `path_sweep()`
-- [ ] Helmet attachment rail segment (matching V-groove profile)
-- [ ] HDPE skeleton plates: collar, shoulder yokes, spine segments (×4), lumbar bridge
-- [ ] Articulation joints between spine segments (overlap + webbing channels)
+- [x] V-groove rail track: 200 mm arc, parametric radius, V-groove cross-section via `path_sweep()`
+- [x] Helmet attachment rail segment (matching V-groove profile)
+- [x] HDPE skeleton plates: collar, shoulder yokes, spine segments (×4), lumbar bridge
+- [x] Articulation joints between spine segments (overlap + webbing channels)
 - [ ] NopSCADlib integration for ball bearings, fasteners, rod end bearings
-- [ ] SolidPython2 wrapper scripts for all OpenSCAD models
+- [x] SolidPython2 wrapper scripts for all OpenSCAD models
 - [ ] CSG → FreeCAD → STEP conversion script
 
 **Deliverables:** Complete parametric geometry pipeline generating STEP assemblies for any size

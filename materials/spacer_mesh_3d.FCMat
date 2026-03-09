@@ -1,0 +1,16 @@
+; FreeCAD material card for 3D Spacer Mesh
+; Ventilation layer — homogenized effective properties
+
+[General]
+Name = SpacerMesh3D
+Description = 3D spacer mesh, ventilation layer (homogenized)
+Father = None
+
+[Mechanical]
+Density = 134 kg/m^3
+YoungsModulus = 5.0 MPa
+PoissonRatio = 0.2
+
+[Thermal]
+ThermalConductivity = 0.06 W/m/K
+SpecificHeat = 1500 J/kg/K

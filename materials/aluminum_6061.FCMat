@@ -1,0 +1,20 @@
+; FreeCAD material card for Aluminum 6061-T6
+; Used for bearing rail track
+
+[General]
+Name = Aluminum6061
+Description = Aluminum 6061-T6, bearing rail track
+SourceURL = https://matweb.com
+Father = Metal
+
+[Mechanical]
+Density = 2700 kg/m^3
+YoungsModulus = 68900 MPa
+PoissonRatio = 0.33
+UltimateTensileStrength = 310 MPa
+YieldStrength = 276 MPa
+
+[Thermal]
+ThermalConductivity = 167.0 W/m/K
+SpecificHeat = 896 J/kg/K
+ThermalExpansionCoefficient = 23.6e-6 1/K

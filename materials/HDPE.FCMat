@@ -1,0 +1,20 @@
+; FreeCAD material card for HDPE (High-Density Polyethylene)
+; Used for skeleton plates, collar substrate, shoulder yokes
+
+[General]
+Name = HDPE
+Description = High-density polyethylene, 6mm sheet for skeleton components
+SourceURL = https://matweb.com
+Father = Metal
+
+[Mechanical]
+Density = 950 kg/m^3
+YoungsModulus = 1100 MPa
+PoissonRatio = 0.42
+UltimateTensileStrength = 32 MPa
+YieldStrength = 26 MPa
+
+[Thermal]
+ThermalConductivity = 0.46 W/m/K
+SpecificHeat = 2100 J/kg/K
+ThermalExpansionCoefficient = 120e-6 1/K
