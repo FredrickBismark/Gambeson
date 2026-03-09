@@ -65,12 +65,15 @@ class Material:
         lines = [f"*MATERIAL, NAME={self.name.upper()}"]
 
         if self.model == "linear_elastic":
-            assert self.youngs_modulus is not None
-            assert self.poissons_ratio is not None
+            if self.youngs_modulus is None or self.poissons_ratio is None:
+                raise ValueError(
+                    f"{self.name}: linear_elastic requires youngs_modulus and poissons_ratio"
+                )
             lines.append("*ELASTIC")
             lines.append(f"{self.youngs_modulus}, {self.poissons_ratio}")
         elif self.model == "hyperfoam":
-            assert self.hyperfoam is not None
+            if self.hyperfoam is None:
+                raise ValueError(f"{self.name}: hyperfoam model requires hyperfoam parameters")
             n = self.hyperfoam["N"]
             lines.append(f"*HYPERFOAM, N={n}")
             params = []
@@ -82,8 +85,10 @@ class Material:
                 ])
             lines.append(", ".join(params))
         elif self.model == "hyperfoam_viscoelastic":
-            assert self.hyperfoam is not None
-            assert self.viscoelastic is not None
+            if self.hyperfoam is None or self.viscoelastic is None:
+                raise ValueError(
+                    f"{self.name}: hyperfoam_viscoelastic requires hyperfoam and viscoelastic params"
+                )
             n = self.hyperfoam["N"]
             lines.append(f"*HYPERFOAM, N={n}")
             params = []
@@ -95,7 +100,8 @@ class Material:
                 ])
             lines.append(", ".join(params))
         elif self.model == "orthotropic_shell":
-            assert self.orthotropic is not None
+            if self.orthotropic is None:
+                raise ValueError(f"{self.name}: orthotropic_shell requires orthotropic parameters")
             o = self.orthotropic
             lines.append("*ELASTIC, TYPE=ENGINEERING CONSTANTS")
             lines.append(

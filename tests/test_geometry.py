@@ -34,10 +34,14 @@ def test_load_config_all_sizes() -> None:
 def test_layer_stack() -> None:
     config = load_config(CONFIG_PATH, "M")
     assert len(config.layers) == 6
+    # Verify all 6 layers in order (body → exterior)
     assert config.layers[0].name == "spacer_mesh"
     assert config.layers[0].material == "spacer_mesh_3d"
+    assert config.layers[1].name == "cotton_batting"
     assert config.layers[2].name == "hdpe_skeleton"
     assert config.layers[2].thickness == 6.0
+    assert config.layers[3].name == "impact_foam"
+    assert config.layers[4].name == "quilted_batting"
     assert config.layers[5].name == "outer_shell"
 
 
@@ -70,10 +74,11 @@ def test_invalid_size() -> None:
 
 
 def test_size_grading_monotonic() -> None:
-    """Chest pattern width should increase with size."""
-    widths = []
-    for size in ["S", "M", "L", "XL", "XXL"]:
-        config = load_config(CONFIG_PATH, size)
-        widths.append(config.chest_pattern_width)
-    for i in range(1, len(widths)):
-        assert widths[i] > widths[i - 1], f"Size grading not monotonic at index {i}"
+    """Key dimensions should increase with size."""
+    sizes = ["S", "M", "L", "XL", "XXL"]
+    configs = [load_config(CONFIG_PATH, s) for s in sizes]
+    for i in range(1, len(configs)):
+        assert configs[i].chest_pattern_width > configs[i - 1].chest_pattern_width
+        assert configs[i].waist_pattern_width > configs[i - 1].waist_pattern_width
+        assert configs[i].torso_height > configs[i - 1].torso_height
+        assert configs[i].neck_arc_radius >= configs[i - 1].neck_arc_radius

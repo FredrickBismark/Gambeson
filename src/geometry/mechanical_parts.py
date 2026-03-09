@@ -15,7 +15,6 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import math
 import subprocess
 import sys
 from pathlib import Path
@@ -32,15 +31,7 @@ except ImportError:
 
 from src.geometry.config_loader import ArmorConfig, load_config
 
-# Size grading lookup (matches OpenSCAD files)
-SIZE_TABLE: dict[str, dict[str, float]] = {
-    "S":   {"neck_r": 110, "chest_w": 420, "torso_h": 419},
-    "M":   {"neck_r": 120, "chest_w": 440, "torso_h": 445},
-    "L":   {"neck_r": 125, "chest_w": 460, "torso_h": 470},
-    "XL":  {"neck_r": 130, "chest_w": 480, "torso_h": 496},
-    "XXL": {"neck_r": 135, "chest_w": 500, "torso_h": 521},
-}
-
+# Size index mapping for OpenSCAD CLI rendering (matches sizes[] arrays in .scad files)
 SIZE_INDEX: dict[str, int] = {"S": 0, "M": 1, "L": 2, "XL": 3, "XXL": 4}
 
 
@@ -130,34 +121,6 @@ def render_all_parts(
             print(f"Warning: skipped {name}: {e}", file=sys.stderr)
 
     return paths
-
-
-def generate_v_groove_profile_scad(
-    groove_angle: float = 90.0,
-    groove_depth: float = 6.0,
-    track_width: float = 55.0,
-    track_depth: float = 18.0,
-    wall_thick: float = 4.0,
-) -> str:
-    """Generate OpenSCAD code for V-groove cross-section profile.
-
-    Returns OpenSCAD polygon code as a string for embedding.
-    """
-    half_groove = groove_depth * math.tan(math.radians(groove_angle / 2))
-    half_width = track_width / 2
-
-    points = [
-        (-half_width, track_depth),
-        (-half_width, 0),
-        (-half_groove, 0),
-        (0, -groove_depth),
-        (half_groove, 0),
-        (half_width, 0),
-        (half_width, track_depth),
-    ]
-
-    point_str = ", ".join(f"[{x:.1f}, {y:.1f}]" for x, y in points)
-    return f"polygon(points=[{point_str}]);"
 
 
 def main(argv: list[str] | None = None) -> int:

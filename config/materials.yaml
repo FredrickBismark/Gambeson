@@ -74,8 +74,8 @@ materials:
 
   CORDURA_500D:
     description: "CORDURA 500D nylon fabric (outer shell)"
-    density_si: 1140          # solid nylon 6,6
-    density_ccx: 3.15e-7      # effective for shell thickness
+    density_si: 1140          # kg/m³, solid nylon 6,6
+    density_ccx: 1.14e-6      # tonnes/mm³ = 1140 × 1e-9
     # Orthotropic properties (warp/fill/through-thickness)
     orthotropic:
       E1: 2800.0    # MPa, warp
@@ -97,7 +97,7 @@ materials:
   CORDURA_1000D:
     description: "CORDURA 1000D nylon fabric (heavy-duty outer shell)"
     density_si: 1140
-    density_ccx: 3.15e-7
+    density_ccx: 1.14e-6      # tonnes/mm³ = 1140 × 1e-9
     orthotropic:
       E1: 2800.0
       E2: 2800.0

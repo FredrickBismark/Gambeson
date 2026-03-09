@@ -59,6 +59,26 @@ def test_cordura_orthotropic() -> None:
     assert cord.orthotropic is not None
     assert cord.orthotropic["E1"] == 2800.0
     assert cord.orthotropic["G12"] == 500.0
+    # Verify density conversion: 1140 kg/m³ → 1.14e-6 tonnes/mm³
+    assert abs(cord.density_ccx - 1.14e-6) < 1e-10
+
+
+def test_cordura_1000d_orthotropic() -> None:
+    db = MaterialDatabase(MATERIALS_YAML)
+    cord = db.get("CORDURA_1000D")
+    assert cord.model == "orthotropic_shell"
+    assert cord.orthotropic is not None
+    assert cord.density_si == 1140
+    assert abs(cord.density_ccx - 1.14e-6) < 1e-10
+
+
+def test_closed_cell_foam_hyperfoam() -> None:
+    db = MaterialDatabase(MATERIALS_YAML)
+    foam = db.get("closed_cell_foam")
+    assert foam.model == "hyperfoam"
+    assert foam.hyperfoam is not None
+    assert foam.hyperfoam["mu1"] == 0.8
+    assert foam.density_si == 65
 
 
 def test_validate_no_errors() -> None:

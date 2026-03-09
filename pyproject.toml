@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "gambeson"
 version = "0.1.0"
 description = "Parametric CAD + FEA simulation pipeline for a modern gambeson armor system"
-readme = "ROADMAP.md"
+readme = "Modern_Gambeson_System_Whitepaper.md"
 license = "CERN-OHL-S-2.0"
 requires-python = ">=3.10"
 authors = [

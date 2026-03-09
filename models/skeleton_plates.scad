@@ -148,12 +148,18 @@ module spine_segment() {
 
         // Corner radii (approximate rounded corners)
         r = 8;
-        for (corner = [[0, 0], [spine_w, 0], [spine_w, spine_h], [0, spine_h]]) {
-            translate([corner[0], corner[1], -1])
+        // [corner_x, corner_y, cube_offset_x, cube_offset_y, cyl_x, cyl_y]
+        for (c = [
+            [0,       0,       -r, -r, 0,  0 ],    // bottom-left
+            [spine_w, 0,        0, -r, 0,  0 ],    // bottom-right
+            [spine_w, spine_h,  0,  0, 0,  0 ],    // top-right
+            [0,       spine_h, -r,  0, 0,  0 ]     // top-left
+        ]) {
+            translate([c[0] + c[2], c[1] + c[3], -1])
             difference() {
                 cube([r, r, hdpe_t + 2]);
-                translate([corner[0] == 0 ? r : 0,
-                          corner[1] == 0 ? r : 0, 0])
+                translate([c[0] == 0 ? r : 0,
+                          c[1] == 0 ? r : 0, 0])
                 cylinder(r = r, h = hdpe_t + 2, $fn = 20);
             }
         }
@@ -194,9 +200,9 @@ module lumbar_bridge() {
             cylinder(d = bolt_d, h = hdpe_t + 2, $fn = 16);
         }
 
-        // D3O insert pocket outline (kidney protection area)
+        // D3O insert pocket recess (kidney protection area, 2mm deep)
         translate([lumbar_w / 2 - 50, 40, hdpe_t - 2])
-        cube([100, 80, 3]);
+        cube([100, 80, hdpe_t]);
 
         // Webbing slots for hip belt connection
         for (x = [15, lumbar_w - 65])
