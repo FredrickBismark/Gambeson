@@ -1,0 +1,155 @@
+# Material property database for the Modern Gambeson System
+#
+# Unit system: mm / N / s / K (CalculiX conventions)
+#   - Density: tonnes/mm³  (kg/m³ × 1e-9)
+#   - Young's modulus: MPa (= N/mm²)
+#   - Thermal conductivity: mW/(mm·K) (= W/(m·K))
+#   - Specific heat: mJ/(tonne·K) (= J/(kg·K) × 1e6)
+
+materials:
+  HDPE:
+    description: "High-density polyethylene, 6mm sheet (skeleton)"
+    density_si: 950          # kg/m³
+    density_ccx: 9.5e-7      # tonnes/mm³
+    youngs_modulus: 1100.0    # MPa
+    poissons_ratio: 0.42
+    thermal_conductivity: 0.46  # W/(m·K)
+    specific_heat: 2100.0       # J/(kg·K)
+    model: linear_elastic
+    sources:
+      - "MatWeb HDPE typical"
+      - "MakeItFrom HDPE"
+
+  EVA_HD:
+    description: "High-density EVA foam, 85 kg/m³ (impact absorption)"
+    density_si: 85
+    density_ccx: 8.5e-8
+    # Hyperfoam parameters (Ogden N=1)
+    hyperfoam:
+      N: 1
+      mu1: 1.25      # MPa
+      alpha1: 2.0
+      nu1: 0.0       # Poisson (fully compressible foam)
+    thermal_conductivity: 0.04
+    specific_heat: 2300.0
+    model: hyperfoam
+    sources:
+      - "MDPI Polymers 2024, EVA foam compression study"
+      - "The Foamory specifications"
+
+  D3O:
+    description: "D3O rate-sensitive impact polymer (approximation)"
+    density_si: 350         # mid-range estimate
+    density_ccx: 3.5e-7
+    # Hyperfoam + viscoelastic (Prony series)
+    hyperfoam:
+      N: 1
+      mu1: 2.0       # MPa (stiffer than EVA)
+      alpha1: 2.5
+      nu1: 0.0
+    viscoelastic:
+      # Prony series terms (approximated from polyurethane literature)
+      g_prony: [0.4, 0.2]
+      k_prony: [0.4, 0.2]
+      tau: [0.001, 0.1]    # seconds
+    thermal_conductivity: 0.055
+    specific_heat: 1800.0
+    model: hyperfoam_viscoelastic
+    notes: "Properties are approximated — D3O data is proprietary"
+    sources:
+      - "Polyurethane foam literature (approximation)"
+
+  cotton_batting:
+    description: "100% cotton batting, quilting grade"
+    density_si: 60
+    density_ccx: 6.0e-8
+    youngs_modulus: 0.01      # MPa (extremely compliant)
+    poissons_ratio: 0.1
+    thermal_conductivity: 0.038
+    specific_heat: 1300.0
+    model: linear_elastic
+    notes: "Omit from structural analysis; include in thermal only"
+    sources:
+      - "Textile engineering references"
+
+  CORDURA_500D:
+    description: "CORDURA 500D nylon fabric (outer shell)"
+    density_si: 1140          # solid nylon 6,6
+    density_ccx: 3.15e-7      # effective for shell thickness
+    # Orthotropic properties (warp/fill/through-thickness)
+    orthotropic:
+      E1: 2800.0    # MPa, warp
+      E2: 2800.0    # MPa, fill
+      E3: 200.0     # MPa, through-thickness
+      nu12: 0.35
+      nu13: 0.10
+      nu23: 0.10
+      G12: 500.0    # MPa
+      G13: 100.0
+      G23: 100.0
+    thermal_conductivity: 0.25
+    specific_heat: 1700.0
+    model: orthotropic_shell
+    sources:
+      - "Nylon 6,6 textile data"
+      - "CORDURA brand specifications"
+
+  CORDURA_1000D:
+    description: "CORDURA 1000D nylon fabric (heavy-duty outer shell)"
+    density_si: 1140
+    density_ccx: 3.15e-7
+    orthotropic:
+      E1: 2800.0
+      E2: 2800.0
+      E3: 200.0
+      nu12: 0.35
+      nu13: 0.10
+      nu23: 0.10
+      G12: 500.0
+      G13: 100.0
+      G23: 100.0
+    thermal_conductivity: 0.25
+    specific_heat: 1700.0
+    model: orthotropic_shell
+    sources:
+      - "Nylon 6,6 textile data"
+
+  spacer_mesh_3d:
+    description: "3D spacer mesh (ventilation layer)"
+    density_si: 134
+    density_ccx: 1.34e-7
+    youngs_modulus: 5.0       # MPa, homogenized effective
+    poissons_ratio: 0.2
+    thermal_conductivity: 0.06
+    specific_heat: 1500.0
+    model: linear_elastic
+    notes: "Homogenized properties; actual mesh is anisotropic"
+    sources:
+      - "Spacer fabric literature"
+
+  closed_cell_foam:
+    description: "Closed-cell foam (collar/hip belt padding)"
+    density_si: 65
+    density_ccx: 6.5e-8
+    hyperfoam:
+      N: 1
+      mu1: 0.8
+      alpha1: 2.0
+      nu1: 0.0
+    thermal_conductivity: 0.04
+    specific_heat: 2100.0
+    model: hyperfoam
+    sources:
+      - "Generic XPE/EVA closed-cell foam"
+
+  aluminum_6061:
+    description: "Aluminum 6061-T6 (bearing rail track)"
+    density_si: 2700
+    density_ccx: 2.7e-6
+    youngs_modulus: 68900.0    # MPa
+    poissons_ratio: 0.33
+    thermal_conductivity: 167.0
+    specific_heat: 896.0
+    model: linear_elastic
+    sources:
+      - "MatWeb Al 6061-T6"

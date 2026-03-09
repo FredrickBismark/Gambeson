@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Generated output
+output/
+*.stl
+*.step
+*.stp
+*.brep
+*.inp
+*.frd
+*.dat
+*.cvg
+*.sta
+*.vtu
+*.vtk
+*.msh
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker/*.log
+
+# Test / coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage

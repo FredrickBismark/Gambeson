@@ -1,0 +1,122 @@
+# Parametric armor configuration
+# All dimensions in mm unless otherwise noted.
+
+sizes:
+  S:
+    chest_pattern_width: 420
+    waist_pattern_width: 340
+    chest_circumference: [864, 940]   # 34-37 inches
+    waist_circumference: [711, 787]   # 28-31 inches
+    hip_circumference: [864, 940]
+    torso_length: [406, 432]          # 16-17 inches
+    neck_arc_radius: 110
+  M:
+    chest_pattern_width: 440
+    waist_pattern_width: 360
+    chest_circumference: [965, 1041]  # 38-41 inches
+    waist_circumference: [813, 889]   # 32-35 inches
+    hip_circumference: [965, 1041]
+    torso_length: [432, 457]          # 17-18 inches
+    neck_arc_radius: 120
+  L:
+    chest_pattern_width: 460
+    waist_pattern_width: 380
+    chest_circumference: [1067, 1143] # 42-45 inches
+    waist_circumference: [914, 991]   # 36-39 inches
+    hip_circumference: [1067, 1143]
+    torso_length: [457, 483]          # 18-19 inches
+    neck_arc_radius: 125
+  XL:
+    chest_pattern_width: 480
+    waist_pattern_width: 400
+    chest_circumference: [1168, 1245] # 46-49 inches
+    waist_circumference: [1016, 1092] # 40-43 inches
+    hip_circumference: [1168, 1245]
+    torso_length: [483, 508]          # 19-20 inches
+    neck_arc_radius: 130
+  XXL:
+    chest_pattern_width: 500
+    waist_pattern_width: 420
+    chest_circumference: [1270, 1346] # 50-53 inches
+    waist_circumference: [1118, 1194] # 44-47 inches
+    hip_circumference: [1270, 1346]
+    torso_length: [508, 533]          # 20-21 inches
+    neck_arc_radius: 135
+
+# Layer stack (body → exterior), thicknesses in mm
+layers:
+  - name: spacer_mesh
+    material: spacer_mesh_3d
+    thickness_min: 3.0
+    thickness_max: 6.0
+    thickness_default: 4.0
+  - name: cotton_batting
+    material: cotton_batting
+    thickness_min: 15.0
+    thickness_max: 25.0
+    thickness_default: 20.0
+  - name: hdpe_skeleton
+    material: HDPE
+    thickness: 6.0
+  - name: impact_foam
+    material: EVA_HD
+    thickness_min: 6.0
+    thickness_max: 15.0
+    thickness_default: 10.0
+  - name: quilted_batting
+    material: cotton_batting
+    thickness_min: 10.0
+    thickness_max: 15.0
+    thickness_default: 12.0
+  - name: outer_shell
+    material: CORDURA_500D
+    thickness: 0.8
+
+# Quilting parameters
+quilting:
+  spacing: 35.0  # mm, historical optimum
+  pattern_chest: diamond  # diamond, horizontal, vertical
+  pattern_elbow: horizontal
+  pattern_torso_side: vertical
+
+# Skeleton components
+skeleton:
+  collar:
+    arc_radius: null  # set per-size from sizes.<size>.neck_arc_radius
+    arc_length: 200.0
+    width: 55.0
+    substrate_thickness: 6.0
+    padding_thickness: 10.0
+  shoulder_yoke:
+    length: 200.0
+    width_shoulder: 80.0
+    width_taper: 50.0
+    thickness: 5.0
+  spine_plate:
+    segment_count: 4
+    segment_width: 150.0
+    segment_height: 100.0
+    segment_thickness: 6.0
+    overlap: 25.0
+  lumbar_bridge:
+    width: 200.0
+    height: 150.0
+    thickness: 6.0
+  hip_belt:
+    width: 125.0  # 100-150 mm
+    stiffener_thickness: 3.0
+    padding_thickness: 25.0
+
+# Bearing rail
+bearing_rail:
+  type: v_groove  # v_groove, polymer_plain, curved_linear
+  track_width: 55.0
+  track_depth: 18.0
+  wheel_diameter: 9.0  # 8-10 mm V-groove bearing wheels
+
+# Construction parameters
+construction:
+  seam_allowance: 12.7  # 1/2 inch
+  chest_ease: 75.0      # 2-4 inches added ease for padding
+  armscye_type: grande_assiette
+  gore_position: forward_of_side_seam
